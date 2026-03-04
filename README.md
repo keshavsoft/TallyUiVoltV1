@@ -68,30 +68,6 @@ If you run `gulp` without specifying any tasks, it will execute the default task
 
 ## Release Notes
 
-### 1.4.2
+### 1.1.2
 
-- Volt - Bootstrap 5 Dashboard, changed to handlebars
-
-### 1.4.3
-
-- settings html started
-
-### 1.4.4
-
-- transactions html started
-
-### 1.4.5
-
-- transactions versions started
-
-### 1.4.6
-
-- partials refactor
-
-### 1.4.7
-
-- tally started
-
-### 1.4.8
-
-- tally index perfect
+- filter ledgers perfect
