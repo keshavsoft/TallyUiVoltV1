@@ -1,0 +1,9 @@
+{
+    "ledgerUrl": "ledgers.json",
+    "domIds": {
+        "tableContainer": "visits-container",
+        "tableTemplate": "visit-template",
+        "searchInput": "topbarInputIconLeft",
+        "ledgerCountBtn": "ledgerCountBtn"
+    }
+}

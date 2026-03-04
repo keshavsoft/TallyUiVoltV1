@@ -1,24 +1,35 @@
-import { StartFunc as FetchData } from "./fetchData.js";
-import { StartFunc as FilterLedgers } from "./filterLedgers.js";
-import { StartFunc as RenderVisits } from "./renderTable.js";
-import { StartFunc as AttachSearch } from "./searchHighlight.js";
+import { StartFunc as FetchData } from "./Data/fetchData.js";
+import { StartFunc as FilterLedgers } from "./Data/filterLedgers.js";
+import { StartFunc as RenderVisits } from "./Ui/renderTable.js";
+import { StartFunc as AttachSearch } from "./Ui/searchHighlight.js";
+import config from "./config.json" with { type: "json" };
+import { StartFunc as BuildDomCache } from "./domCache.js";
 
 const StartFunc = async () => {
-    const visitsData = await FetchData({ url: "ledgers.json" });
+    const localDom = BuildDomCache({
+        inConfig: config
+    });
 
-    const filteredData = FilterLedgers({ data: visitsData });
+    const localData = await FetchData({
+        inUrl: config.ledgerUrl
+    });
 
-    if (!filteredData.length) return;
+    const localFiltered = FilterLedgers({
+        inData: localData
+    });
+
+    if (!localFiltered.length) return;
 
     RenderVisits({
-        data: filteredData,
-        containerId: "visits-container",
-        templateId: "visit-template"
+        inData: localFiltered,
+        inDomContainer: localDom.tableContainer,
+        inDomTemplate: localDom.tableTemplate,
+        inDomLedgerBtn: localDom.ledgerCountBtn
     });
 
     AttachSearch({
-        inputId: "topbarInputIconLeft",
-        tableId: "visits-container"
+        inDomInput: localDom.searchInput,
+        inDomTable: localDom.tableContainer
     });
 };
 
